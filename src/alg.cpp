@@ -2,7 +2,7 @@
 #include <string>
 #include "tstack.h"
 
-int priority(char count) {
+int p(char count) {
     switch (count) {
       case '(':
           return 0;
@@ -29,7 +29,7 @@ std::string infx2pstfx(std::string inf) {
             r += ' ';
         } else if (inf[i] == '(') {
             stack.push(inf[i]);
-        } else if (priority(inf[i]) > priority(stack.get()) || stack.isEmpty()) {
+        } else if (p(inf[i]) > p(stack.get()) || stack.isEmpty()) {
             stack.push(inf[i]);
         } else if (inf[i] == ')') {
             while (!stack.isEmpty() && stack.get() != '(') {
@@ -42,7 +42,7 @@ std::string infx2pstfx(std::string inf) {
                stack.pop();
             }
         } else {
-            while (!stack.isEmpty() && priority(stack.get()) >= priority(inf[i])) {
+            while (!stack.isEmpty() && p(stack.get()) >= p(inf[i])) {
                 r += stack.get();
                 r += ' ';
                 stack.pop();
